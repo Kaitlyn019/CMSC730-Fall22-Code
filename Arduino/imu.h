@@ -54,8 +54,8 @@ void callibrate(){
     float elapsedTime = (currentTime - previousTime)/1000.0;
 
     gyroAngleX = gyroAngleX + gyroX_Per_S * elapsedTime;
-    gyroAngleY = gyroAngleY + gyroX_Per_S * elapsedTime;
-    gyroAngleZ = gyroAngleZ + gyroX_Per_S * elapsedTime;
+    gyroAngleY = gyroAngleY + gyroY_Per_S * elapsedTime;
+    gyroAngleZ = gyroAngleZ + gyroZ_Per_S * elapsedTime;
 
     delay(100);
   }
@@ -118,9 +118,9 @@ void imu_read(float *ax, float *ay, float *az, float *gx, float *gy, float *gz) 
   currentTime = millis();
   float elapsedTime = (currentTime - previousTime)/1000.0;
 
-  gyroAngleX = gyroAngleX + ((GYRO_X_RAW/131.0) - caliX) * elapsedTime;
-  gyroAngleY = gyroAngleY + ((GYRO_Y_RAW/131.0) - caliY) * elapsedTime;
-  gyroAngleZ = gyroAngleZ + ((GYRO_Z_RAW/131.0) - caliZ) * elapsedTime;
+  gyroAngleX = ((GYRO_X_RAW/131.0) - caliX) * elapsedTime;
+  gyroAngleY = ((GYRO_Y_RAW/131.0) - caliY) * elapsedTime;
+  gyroAngleZ = ((GYRO_Z_RAW/131.0) - caliZ) * elapsedTime;
 
   *gx = gyroAngleX;
   *gy = gyroAngleY;

@@ -20,7 +20,8 @@ max_count = 10
 dataset = [] ## for training
 classmap = {}  ## for training
 
-training = False ## set to true if training model
+## SET THIS VALUE:
+training = True ## set to true if training model
 
 if (not training): ## load in a classmap file
     temp = pd.read_csv("Data/test_class.csv").values
@@ -73,9 +74,9 @@ while count <= max_count:
 
                 data_print += round
 
-                round.append(r['gyro_x_raw'] - 1000)
-                round.append(r['gyro_y_raw'] - 1000)
-                round.append(r['gyro_z_raw'] - 1000)
+                round.append(r['gyro_x_raw'] - 360)
+                round.append(r['gyro_y_raw'] - 360)
+                round.append(r['gyro_z_raw'] - 360)
 
                 data += round
                 i += 1
