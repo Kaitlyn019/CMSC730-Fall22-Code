@@ -1,7 +1,7 @@
 #ifndef IMU_WIFI_H
 #define IMU_WIFI_H
 
-const uint16_t MAX_IMU_READINGS = 50;
+const uint16_t MAX_IMU_READINGS = 25;
 
 
 typedef struct __attribute__((PACKED)) {
