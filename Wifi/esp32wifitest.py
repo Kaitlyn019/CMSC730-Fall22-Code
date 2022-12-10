@@ -16,15 +16,20 @@ s.listen(0)
  
 cont = 'y' ## stop program running
 count = 1 ## counting # of iterations
-max_count = 10
+max_count = 15
 dataset = [] ## for training
 classmap = {}  ## for training
 
 ## SET THIS VALUE:
 training = False ## set to true if training model
 
+manual = False;
+default = "bump"
+
+loaded_model = 0;
+
 if (not training): ## load in a classmap file
-    temp = pd.read_csv("Data/test_class.csv").values
+    temp = pd.read_csv("Data/set_c.csv").values
     vals = temp[0][1:]
     keys = temp[1][1:]
     for i in range(0, len(keys)):
@@ -37,6 +42,9 @@ if (not training): ## load in a classmap file
     #writer.writerow(['timestamp'] + head_cs + ['classification'])
     
     csvfile.close()
+
+    filename = "Data/finalized_model_RF.sav"
+    loaded_model = pickle.load(open(filename, 'rb'))
 
 
 
@@ -87,16 +95,17 @@ while count <= max_count:
             if (training):
                 # For the training phase, comment out later:
                 # After each packet is received, can note what the action was to save
-                
-                c = (input("Classify the action (not case sensitive): \n")).lower()
+                if manual:
+                    c = (input("Classify the action (not case sensitive): \n")).lower()
+                else:
+                    c = default
+
                 if (c not in classmap.values()):
                     classmap[c] = len(classmap)
                 
                 data.append(classmap[c])
             else:
                 # For purely classifying based on a previously loaded in model:
-                filename = "Data/finalized_model.sav"
-                loaded_model = pickle.load(open(filename, 'rb'))
                 result = loaded_model.predict([data])
 
                 data_print.append(classmap[result[0]])

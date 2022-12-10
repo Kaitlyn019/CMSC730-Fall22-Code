@@ -116,7 +116,7 @@ class Page1(tk.Frame):
         if count > 9: # Need to change for the real run
             exit(1)
         file = pd.read_csv("Data/live_data.csv", header=None)
-        file1 = file.iloc[:, 0:151]
+        file1 = file.iloc[:, 0:76] # 151 -> 76
         fileHeight_curr = file.shape[0]
         if fileHeight == fileHeight_curr:
             return spikes, ax, ay, az
@@ -125,7 +125,7 @@ class Page1(tk.Frame):
             ay = file1.iloc[count, 2::3]
             az = file1.iloc[count, 3::3]
 
-            label = file.iloc[count, 151]
+            label = file.iloc[count, 76] # 151-> 76
 
             if (label == spikeName):
                 spikes += 1
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     spikes = 0
     count = 0 # line counter
     spikeName = 'shake'
-    readInterval = 6 # read csv every 1 second
+    readInterval = 3 # read csv every 1 second
     fileHeight = 0
     userName1 = ''
 

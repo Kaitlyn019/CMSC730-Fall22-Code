@@ -1,7 +1,7 @@
 from construct import *
 from construct.lib import *
 
-MAX_IMU_READINGS = 50
+MAX_IMU_READINGS = 25
 
 def imu_reading():
     return Struct(

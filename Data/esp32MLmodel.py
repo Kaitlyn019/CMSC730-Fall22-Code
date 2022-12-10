@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 
-features = pd.read_csv("test.csv")
+features = pd.read_csv("Data/set.csv")
 
 test_size = 0.33
 seed = 7
@@ -22,13 +22,16 @@ filename = 'finalized_model_LR.sav'
 pickle.dump(model, open(filename, 'wb'))
 
 predictions = model.predict(X_test)
-print("Accuracy of LR:",metrics.accuracy_score(X_test, Y_test))
+print("Accuracy of LR:",metrics.accuracy_score(Y_test, predictions))
 
 
 #################
 
-forest = RandomForestClassifier(n_estimators=100, random_state=100)
+forest = RandomForestClassifier(n_estimators=250, max_depth=10)
 forest.fit(X_train,Y_train)
 predictions = forest.predict(X_test)
 
+
+filename = 'finalized_model_RF.sav'
+pickle.dump(forest, open(filename, 'wb'))
 print("Accuracy of RF:", metrics.accuracy_score(Y_test, predictions))
