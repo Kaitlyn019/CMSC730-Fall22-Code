@@ -21,7 +21,7 @@ dataset = [] ## for training
 classmap = {}  ## for training
 
 ## SET THIS VALUE:
-training = True ## set to true if training model
+training = False ## set to true if training model
 
 if (not training): ## load in a classmap file
     temp = pd.read_csv("Data/test_class.csv").values
@@ -31,11 +31,11 @@ if (not training): ## load in a classmap file
         classmap[int(keys[i])] = vals[i]
 
     csvfile = open('Data/live_data.csv', 'w', newline='')
-    writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    #writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-    head_cs = [str(i) for i in range(0, MAX_IMU_READINGS)]
-    writer.writerow(['timestamp'] + head_cs + ['classification'])
-
+    #head_cs = [str(i) for i in range(0, MAX_IMU_READINGS)]
+    #writer.writerow(['timestamp'] + head_cs + ['classification'])
+    
     csvfile.close()
 
 
