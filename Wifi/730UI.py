@@ -5,6 +5,7 @@ from matplotlib.figure import Figure
 style.use('ggplot')
 import pandas as pd
 import numpy as np
+from esp32wifitest import *
 
 class tkinterApp(tk.Tk):
      
@@ -57,9 +58,12 @@ class LoginPage(tk.Frame):
         newUser.place(x=450, y=300)
 
 class Page1(tk.Frame):
-
+    
     def __init__(self, parent, controller):
         global userName1
+        global esp32;
+
+        esp32 = esp32() ## loaded from esp32wifitest
 
         tk.Frame.__init__(self, parent)
 
@@ -81,7 +85,7 @@ class Page1(tk.Frame):
                           command = self.readCount)
         start_button.place(relx = 0.25, rely=0.8)
 
-        end_button = tk.Button(self, text="Stop", padx=10, pady=5, fg="black", bg="#263D42",
+        end_button = tk.Button(self, text="Pause", padx=10, pady=5, fg="black", bg="#263D42",
                           command=self.endCounter)
         end_button.place(relx=0.45, rely=0.8)
 
@@ -99,9 +103,9 @@ class Page1(tk.Frame):
         global az
 
         self.a.clear()
-        self.a.plot(np.arange(0, 50, 1), ax, label='aX')
-        self.a.plot(np.arange(0, 50, 1), ay, label='aY')
-        self.a.plot(np.arange(0, 50, 1), az, label='aZ')
+        self.a.plot(np.arange(0, 25, 1), ax, label='aX') # used to be 50
+        self.a.plot(np.arange(0, 25, 1), ay, label='aY')
+        self.a.plot(np.arange(0, 25, 1), az, label='aZ')
         self.a.legend(loc='upper right')
 
     def spikeCount(self):
@@ -141,14 +145,19 @@ class Page1(tk.Frame):
         global ay
         global az
 
+        esp32.run();
+
         spikes, ax, ay, az = self.spikeCount()
         self.animate()
         self.plot.draw()
         self.plot.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
         self.str1.set(spikes)
-        if stopCounter == 1:
-            return
+      
+        #if stopCounter:
+        #    print ("counter stopped")
+        #    return
+
         self.counter.after(readInterval*1000, self.readCount)
 
     def endCounter(self):
@@ -168,6 +177,7 @@ class Page1(tk.Frame):
         self.str1 = tk.StringVar()
         self.counter = tk.Label(self, textvariable=self.str1, bg="#263D42", fg="white", font=('Helvetica 180'))
         self.counter.place(relx=0.4, rely=0.3)
+        esp32 = esp32()
 
 if __name__ == "__main__":
     stopCounter = False
