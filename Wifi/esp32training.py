@@ -16,7 +16,7 @@ s.listen(0)
  
 cont = 'y' ## stop program running
 count = 1 ## counting # of iterations
-max_count = 15
+max_count = 30
 dataset = [] ## for training
 classmap = {}  ## for training
 
@@ -24,7 +24,7 @@ classmap = {}  ## for training
 training = True ## set to true if training model
 
 manual = False; # set to true if you want to manually type in name of action
-default = "bump" # if false, this will be the auto classification
+default = "notspike" # if false, this will be the auto classification
 
 loaded_model = 0;
 
@@ -125,13 +125,15 @@ while count <= max_count:
     count += 1
 
 if (training):
-    save = input("Save data (Y/N)? ").lower()
+    #save = input("Save data (Y/N)? ").lower()
 
-    if (save == 'y'):
-        fname = input("Enter filename for dataset: ")
-        pd.DataFrame(dataset).to_csv("Data/"+fname+".csv")
+    #if (save == 'y'):
+        #fname = input("Enter filename for dataset: ")
+    fname = "notspike_3sec"
+    pd.DataFrame(dataset).to_csv("Data/"+fname+".csv")
 
-        fname = input("Enter filename for classifications: ")
-        pd.DataFrame([list(classmap.keys()), list(classmap.values())]).to_csv("Data/"+fname+".csv")
+        #fname = input("Enter filename for classifications: ")
+    fname = "testing_class"
+    pd.DataFrame([list(classmap.keys()), list(classmap.values())]).to_csv("Data/"+fname+".csv")
 
 

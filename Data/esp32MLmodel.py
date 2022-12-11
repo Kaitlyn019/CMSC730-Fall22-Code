@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 
-features = pd.read_csv("Data/set.csv")
+features = pd.read_csv("Data/spike_3sec.csv")
 
 test_size = 0.33
 seed = 7

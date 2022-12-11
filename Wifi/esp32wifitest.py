@@ -19,7 +19,7 @@ class esp32():
         self.s.bind(('0.0.0.0', 8090))
         self.s.listen(0)
 
-        temp = pd.read_csv("Data/set_c.csv").values
+        temp = pd.read_csv("Data/testing_class.csv").values
         vals = temp[0][1:]
         keys = temp[1][1:]
         for i in range(0, len(keys)):
